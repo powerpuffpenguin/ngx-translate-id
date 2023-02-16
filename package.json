@@ -1,0 +1,32 @@
+{
+  "name": "@king011/ngx-translate-id",
+  "version": "0.0.1",
+  "description": "ngx-translate id generated",
+  "main": "lib/es6/mod.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "es6": "tsc -t es6 --outDir lib/es6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/powerpuffpenguin/ngx-translate-id.git"
+  },
+  "keywords": [
+    "ngx-translate",
+    "angular",
+    "i18n",
+    "code-generate"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/powerpuffpenguin/ngx-translate-id/issues"
+  },
+  "homepage": "https://github.com/powerpuffpenguin/ngx-translate-id#readme",
+  "dependencies": {
+    "@king011/flags": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0"
+  }
+}
