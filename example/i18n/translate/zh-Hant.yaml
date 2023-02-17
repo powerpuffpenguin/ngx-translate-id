@@ -13,12 +13,13 @@ users:
 # assets group
 A:
   # get assets
-  12: null
-  post: null
+  12: 特殊符號:\測試
+  post: ok
   music:
-    play: |
+    play: |-
       使用 yaml
-      
+    
       你可以方便的書寫換行內容
+    
     # stop tooltip
     stop: null

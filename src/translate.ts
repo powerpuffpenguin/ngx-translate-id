@@ -2,7 +2,7 @@ import { Group, I18N } from './i18n';
 import { dirname, join } from 'path';
 import { mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { parse as JSONParse } from 'jsonc-parser';
-import { load as YAMLPArse } from 'js-yaml';
+import { load as YAMLPArse, dump as YAMLDump } from 'js-yaml';
 
 export type Format = 'json' | 'yaml'
 function getString(o: any, key: string): any {
@@ -274,12 +274,19 @@ export class Translate {
                 const id = (v.opts.id ?? k).toString()
                 let val = getString(o, id) ?? null
                 if (typeof val === "string") {
-                    val = val.trim()
+                    val = YAMLDump(val.trim())
+                    if (!val.startsWith('|-')) {
+                        val = val.trim()
+                    }
                     const vals = val.split("\n")
                     if (vals.length > 1) {
-                        strs.push(`${prefix}${id}: |`)
-                        for (const str of vals) {
-                            strs.push(`${prefix}  ${str.trim()}`)
+                        for (let i = 0; i < vals.length; i++) {
+                            const str = vals[i]
+                            if (i == 0) {
+                                strs.push(`${prefix}${id}: ${str}`)
+                            } else {
+                                strs.push(`${prefix}${str}`)
+                            }
                         }
                         continue
                     }

@@ -1,6 +1,6 @@
 {
   "name": "@king011/ngx-translate-id",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ngx-translate id generated",
   "main": "lib/es6/mod.js",
   "scripts": {

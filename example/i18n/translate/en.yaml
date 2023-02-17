@@ -14,10 +14,11 @@ users:
 A:
   # get assets
   12: ok
-  post: 12
+  post: '12'
   music:
-    play: |
+    play: |-
       sd
       ok
+    
     # stop tooltip
     stop: null
