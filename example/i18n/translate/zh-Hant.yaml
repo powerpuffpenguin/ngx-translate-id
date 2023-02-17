@@ -1,0 +1,24 @@
+home: null
+at: null
+# error title
+# new line
+er: null
+# success title
+success: null
+# warn title
+warn: null
+users:
+  add: null
+  del: null
+# assets group
+A:
+  # get assets
+  12: null
+  post: null
+  music:
+    play: |
+      使用 yaml
+      
+      你可以方便的書寫換行內容
+    # stop tooltip
+    stop: null

@@ -1,0 +1,23 @@
+home: null
+at: null
+# error title
+# new line
+er: null
+# success title
+success: null
+# warn title
+warn: null
+users:
+  add: null
+  del: null
+# assets group
+A:
+  # get assets
+  12: ok
+  post: 12
+  music:
+    play: |
+      sd
+      ok
+    # stop tooltip
+    stop: null

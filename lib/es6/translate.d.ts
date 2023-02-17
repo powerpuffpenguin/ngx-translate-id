@@ -1,4 +1,5 @@
 import { Group, I18N } from './i18n';
+export type Format = 'json' | 'yaml';
 export interface TranslateOptions {
     /**
      * List of language resource ids to support
@@ -12,11 +13,13 @@ export interface TranslateOptions {
     root: Record<string, I18N | Group>;
 }
 export declare class Translate {
+    test: boolean;
     print: boolean;
     readonly languages: Array<string>;
     readonly root: Map<string, I18N | Group>;
     constructor(opts: TranslateOptions);
     object(): Record<string, any>;
+    private _appendNotes;
     /**
      * Generate index code
      * @param filename Generated code path
@@ -27,12 +30,19 @@ export declare class Translate {
      * Update Language assets
      * @param dirname Language assets storage path
      * @param minimize Whether to minimize assets
+     * @param format assets format
      */
-    generateAssets(dirname: string): void;
+    generateAssets(dirname: string, format?: Format): void;
+    private _generateJSONAssets;
+    private _generateJSONKeys;
+    private _generateYAMLAssets;
+    private _generateYAMLKeys;
     /**
      * Pack assets
      * @param from input folder
      * @param to output folder
+     * @param format assets format
      */
-    packAssets(from: string, to: string): void;
+    packAssets(from: string, to: string, format?: Format): void;
+    private _packAssets;
 }

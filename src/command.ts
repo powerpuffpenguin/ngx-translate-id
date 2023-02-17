@@ -34,6 +34,12 @@ export function executeCommand(opts: ExecuteOptions) {
         use: basename(process.argv[1]),
         short: 'ngx translate id tools',
         prepare(flags, cmd) {
+            const all = flags.bool({
+                name: 'all',
+                short: 'a',
+                default: false,
+                usage: 'also specify the -c -o -d flags',
+            })
             const print = flags.bool({
                 name: 'print',
                 short: 'p',
@@ -58,20 +64,33 @@ export function executeCommand(opts: ExecuteOptions) {
                 default: false,
                 usage: `generate minimize assets to ${opts.dist}`,
             })
+            const format = flags.string({
+                name: 'format',
+                short: 'f',
+                default: "json",
+                usage: `assets format [json yaml]`,
+            })
+            const test = flags.bool({
+                name: 'test',
+                short: 't',
+                default: false,
+                usage: `output execution to stdout but don't write to file`,
+            })
             return () => {
+                opts.translate.test = test.value
                 opts.translate.print = print.value
                 let i = 0
-                if (code.value) {
+                if (code.value || all.value) {
                     i++
                     opts.translate.generateCode(opts.code)
                 }
-                if (output.value) {
+                if (output.value || all.value) {
                     i++
-                    opts.translate.generateAssets(opts.output)
+                    opts.translate.generateAssets(opts.output, format.value as any)
                 }
-                if (dist.value) {
+                if (dist.value || all.value) {
                     i++
-                    opts.translate.packAssets(opts.output, opts.dist)
+                    opts.translate.packAssets(opts.output, opts.dist, format.value as any)
                 }
 
                 if (i == 0) {
