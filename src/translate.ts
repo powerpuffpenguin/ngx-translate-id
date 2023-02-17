@@ -21,6 +21,29 @@ function getObject(o: any, key: string): any {
         }
     }
 }
+function stdFormat(o: any) {
+    let i = 0
+    const dst: any = {}
+    for (const k in o) {
+        if (Object.prototype.hasOwnProperty.call(o, k)) {
+            const v = o[k]
+            if (v === null || v === undefined) {
+                continue
+            }
+            if (typeof v === "object") {
+                const val = stdFormat(v)
+                if (val !== null) {
+                    dst[k] = val
+                    i++
+                }
+            } else {
+                i++
+                dst[k] = `${v}`
+            }
+        }
+    }
+    return i == 0 ? null : dst
+}
 export interface TranslateOptions {
     /**
      * List of language resource ids to support
@@ -298,11 +321,12 @@ export class Translate {
         const src = join(from, `${lang}${ext}`)
         const dist = join(to, `${lang}.json`)
 
-        const o = yaml ? YAMLPArse(readFileSync(src, {
+        const o = stdFormat(yaml ? YAMLPArse(readFileSync(src, {
             encoding: "utf-8"
         })) : JSONParse(readFileSync(src, {
             encoding: "utf-8"
-        }))
+        })))
+
         const str = JSON.stringify(o)
         if (this.print || this.test) {
             console.log(str)
