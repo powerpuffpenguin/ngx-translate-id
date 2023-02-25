@@ -1,3 +1,4 @@
+export declare type NoteType = string | number | Array<string | number>;
 export interface I18NOptions {
     /**
      * Resource id will be automatically generated if not set
@@ -6,7 +7,7 @@ export interface I18NOptions {
     /**
      * Instructions for Humans
      */
-    readonly note?: string;
+    readonly note?: NoteType;
 }
 /**
  * This is an item for translation
@@ -21,7 +22,7 @@ export declare class I18N {
  * @param id Resource id will be automatically generated if not set
  * @param note Instructions for Humans
  */
-export declare function i18n(id?: string | number, note?: string): I18N;
+export declare function i18n(id?: string | number, note?: NoteType): I18N;
 /**
  * Create an entry for translation
  * @param opts @see {@link I18NOptions}
@@ -48,4 +49,4 @@ export declare class Group {
 }
 export declare function group(opts?: Record<string, I18N | Group>): Group;
 export declare function group(id?: string | number, opts?: Record<string, I18N | Group>): Group;
-export declare function group(id?: string | number, note?: string, opts?: Record<string, I18N | Group>): Group;
+export declare function group(id?: string | number, note?: NoteType, opts?: Record<string, I18N | Group>): Group;

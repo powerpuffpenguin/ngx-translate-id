@@ -1,15 +1,17 @@
-import { Group, I18N } from './i18n';
+import { Group, I18N, NoteType } from './i18n';
 import { dirname, join } from 'path';
 import { mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { parse as JSONParse } from 'jsonc-parser';
 import { load as YAMLPArse, dump as YAMLDump } from 'js-yaml';
 
 export type Format = 'json' | 'yaml'
-function getString(o: any, key: string): any {
+function getValue(o: any, key: string): any {
     if (typeof o === "object") {
         const v = o[key]
         if (typeof v === "string" || typeof v === "number") {
-            return `${v}`
+            return v
+        } else if (Array.isArray(v)) {
+            return v
         }
     }
 }
@@ -91,8 +93,16 @@ export class Translate {
         }
         return o
     }
-    private _appendNotes(strs: Array<string>, prefix: string, str?: string, yaml = false) {
-        const notes = str?.split('\n')
+    private _appendNotes(strs: Array<string>, prefix: string, str?: NoteType, yaml = false) {
+        if (typeof str === "string") {
+        } else if (typeof str === "number") {
+            str = `${str}`
+        } else if (Array.isArray(str)) {
+            str = str.join("\n")
+        } else {
+            return
+        }
+        const notes = str.split('\n')
         if (notes && notes.length > 0) {
             if (yaml) {
                 for (const str of notes) {
@@ -216,7 +226,7 @@ export class Translate {
             if (v instanceof I18N) {
                 this._appendNotes(strs, prefix, v.opts.note)
                 const id = (v.opts.id ?? k).toString()
-                const val = getString(o, id) ?? null
+                const val = getValue(o, id) ?? null
                 let str = `${prefix}${JSON.stringify(id)}: ${JSON.stringify(val)}`
                 if (i != vals.length) {
                     str += ","
@@ -272,7 +282,7 @@ export class Translate {
             if (v instanceof I18N) {
                 this._appendNotes(strs, prefix, v.opts.note, true)
                 const id = (v.opts.id ?? k).toString()
-                let val = getString(o, id) ?? null
+                let val = getValue(o, id) ?? null
                 if (typeof val === "string") {
                     val = YAMLDump(val.trim())
                     if (!val.startsWith('|-')) {

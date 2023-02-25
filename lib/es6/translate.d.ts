@@ -1,5 +1,5 @@
 import { Group, I18N } from './i18n';
-export type Format = 'json' | 'yaml';
+export declare type Format = 'json' | 'yaml';
 export interface TranslateOptions {
     /**
      * List of language resource ids to support
