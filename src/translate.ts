@@ -32,15 +32,15 @@ function stdFormat(o: any) {
             if (v === null || v === undefined) {
                 continue
             }
-            if (typeof v === "object") {
+            if (Array.isArray(v) || typeof v === "number" || typeof v === "string") {
+                i++
+                dst[k] = v
+            } else if (typeof v === "object") {
                 const val = stdFormat(v)
                 if (val !== null) {
                     dst[k] = val
                     i++
                 }
-            } else {
-                i++
-                dst[k] = `${v}`
             }
         }
     }
@@ -343,7 +343,6 @@ export class Translate {
         })) : JSONParse(readFileSync(src, {
             encoding: "utf-8"
         })))
-
         const str = JSON.stringify(o)
         if (this.print || this.test) {
             console.log(str)

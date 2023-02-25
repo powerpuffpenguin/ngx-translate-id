@@ -5,7 +5,7 @@ const translate = new Translate({
     // Set the list of languages to translate
     languages: [
         'en',
-        'zh-Hant',
+        // 'zh-Hant',
     ],
     // Set translation entry
     root: {
