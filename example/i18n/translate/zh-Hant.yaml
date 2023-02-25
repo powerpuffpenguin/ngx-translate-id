@@ -18,8 +18,8 @@ A:
   music:
     play: |-
       使用 yaml
-    
+
       你可以方便的書寫換行內容
-    
+
     # stop tooltip
     stop: null

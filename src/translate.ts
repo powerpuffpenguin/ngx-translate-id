@@ -300,6 +300,8 @@ export class Translate {
                         }
                         continue
                     }
+                } else if (Array.isArray(val)) {
+                    val = JSON.stringify(val)
                 }
                 let str = `${prefix}${id}: ${val}`
                 strs.push(str)

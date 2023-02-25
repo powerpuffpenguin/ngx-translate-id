@@ -8,17 +8,20 @@ success: null
 # warn title
 warn: null
 users:
-  add: null
-  del: null
+  add:
+    - 1
+    - 2
+    - 3
+  del: 1
 # assets group
 A:
   # get assets
   12: ok
-  post: '12'
+  post: "12"
   music:
     play: |-
       sd
       ok
-    
+
     # stop tooltip
     stop: null
